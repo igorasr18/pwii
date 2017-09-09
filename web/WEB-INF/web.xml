@@ -4,9 +4,17 @@
         <servlet-name>LoginAuthentication</servlet-name>
         <servlet-class>model.LoginAuthentication</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>dataGridServlet</servlet-name>
+        <servlet-class>model.dataGridServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginAuthentication</servlet-name>
         <url-pattern>/LoginAuthentication</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>dataGridServlet</servlet-name>
+        <url-pattern>/dataGridServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

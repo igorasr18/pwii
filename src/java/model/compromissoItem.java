@@ -13,14 +13,23 @@ public class compromissoItem {
     private String usuario;
     private String compromisso;
     private String data;
-    private String hora;   
+    private String hora;
+    private int id;
  
     public compromissoItem(){
         usuario = "";
         compromisso = "";
         data = "";
-        hora = "";      
+        hora = "";
+        id = 0;
     }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getUsuario() {
         return usuario;
     }

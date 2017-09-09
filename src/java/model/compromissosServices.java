@@ -89,11 +89,11 @@ public class compromissosServices {
         return compromissosLista;
  
     }    
-    //criar novo id na tabela e refazer o método
-     public boolean deleteCompromisso(String userid){
+ 
+     public boolean deleteCompromisso(String id){
         boolean isSuccess = false;
         ResultSet rs = null;
-        String strsql = "delete from usersprofile where UserID=?";
+        String strsql = "delete from compromissos where id=?";
         PreparedStatement prepStatement = null;        
         Connection conn = null;
         try {
@@ -102,7 +102,7 @@ public class compromissosServices {
             int rtnCode = 0;
             getDbConn().setAutoCommit(false);
             prepStatement = conn.prepareStatement(strsql);
-            prepStatement.setString(1, userid);
+            prepStatement.setString(1, id);
             rtnCode = prepStatement.executeUpdate();
             if (rtnCode > 0) {
                 _dbConn.commit();
