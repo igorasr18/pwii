@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -97,11 +98,12 @@ public class LoginAuthentication extends HttpServlet {
             usuario=rs.getString("usuario");
             senha=rs.getString("senha");
             if(usuario.equals(request.getParameter("usuario")) && senha.equals(request.getParameter("senha"))){
+                HttpSession sessao = request.getSession();
+                sessao.setAttribute("login", usuario);
                 response.sendRedirect("PaginaInicial.jsp");
             }
         }
-        out.println("Usuário ou Senha Errada");
-        out.println("<a href='loginAgenda.jsp'><br>Fazer login novamente</a>");
+        response.sendRedirect("loginAgenda.jsp?msg=Nenhum usuario logado.");
 
         rs.close ();
         s.close ();
