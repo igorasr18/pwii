@@ -18,10 +18,10 @@
     <script type="text/javascript">
  
         function ConfirmOnDelete(item) {
-          if (confirm("Are you sure to delete " + item + "?") === true)
-              return true;
-          else
-        return false;
+            if (confirm("Are you sure to delete " + item + "?") === true)
+                return true;
+            else
+                return false;
        }
     </script>
     
@@ -39,24 +39,25 @@
         }%>
         
         <fieldset>
-            <legend>Users Management</legend>
+            <legend>Lista de Compromissos</legend>
             ${errorMessage}
             ${successMessage}
              
  
             <div>
-                <form action="<c:url value="/dataGridServlet" />" method="POST">
+                <form action="<c:url value="./dataGridServlet" />" method="POST">
                       <%
                           int limitStart = 0;
                           int limitMax = 15;
                           int pageSize = 15;
                           int allUserCount = 0;
                           int pageIndex = 0; //start page from index 0
+                          String s = session.getAttribute("login").toString();
                           session = request.getSession(false);
 
                           compromissosServices compromissoServ = new compromissosServices();
                           List<compromissoItem> CompromissosList = new ArrayList<compromissoItem>();                          
-                          CompromissosList = compromissoServ.getCompromissos();                         
+                          CompromissosList = compromissoServ.getCompromissos(s);                         
  
  
                           String tableCompromissos = "<table class=\"mainTable\" cellspacing=\"0\" rules=\"all\" id=\"MainContent_GridView1\" style=\"border-color:Gray;border-width:1px;border-style:Solid;width:95%;border-collapse:collapse;\">";
@@ -77,7 +78,7 @@
                           for (compromissoItem ci : CompromissosList) {
                               tableCompromissos += "<tr style=\"border-color:Gray;border-width:1px;border-style:Solid;\">";
                               tableCompromissos += "<td style=\"border-color:#CCCCCC;border-width:1px;border-style:Solid;width:20px;padding:4px;\">";
-                              tableCompromissos += Integer.toString(index);
+                              tableCompromissos += ci.getId();
                               tableCompromissos += "</td>";
                               tableCompromissos += "<td style=\"border-color:#CCCCCC;border-width:1px;border-style:Solid;width:100px;padding:4px;\">";
                               tableCompromissos += ci.getUsuario();

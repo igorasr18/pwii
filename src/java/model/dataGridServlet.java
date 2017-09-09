@@ -32,16 +32,16 @@ public class dataGridServlet extends HttpServlet {
         }
         if(compromissoSelecionado.trim().equalsIgnoreCase("")){
             request.setAttribute("errorMessage","Cannot find user id");
-            request.getRequestDispatcher("/datagrid.jsp").forward(request, response);
+            request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
         }else{            
-            if(actionValue.contains("Remove")){    
+            if(actionValue.contains("Deletar")){    
                 compromissosServices compromissoServis = new compromissosServices();
                 if(compromissoServis.deleteCompromisso(compromissoSelecionado)){
                     request.setAttribute("successMessage", "Successfully delete user: <b>" + compromissoSelecionado + "</b>");
-                    request.getRequestDispatcher("./PaginaInicial.jsp").forward(request, response);
+                    request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
                 }else{
                     request.setAttribute("errorMessage", "Failed to delete user: <b>" + compromissoSelecionado + "</b>, please try again");                    
-                   request.getRequestDispatcher("./PaginaInicial.jsp").forward(request, response);
+                   request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
                 }                
             }else{
                 //process redirect to modify user page with query string user id

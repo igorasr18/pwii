@@ -13,6 +13,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import javafx.beans.binding.Bindings;
+import javax.servlet.DispatcherType;
+
 /**
  *
  * @author Igor
@@ -62,18 +65,21 @@ public class compromissosServices {
         _user = "root";
         _dbPassword = "root";      
     }
-    public List<compromissoItem> getCompromissos() {
+    public List<compromissoItem> getCompromissos(String usuario) {
         ResultSet rs = null;
-        String strsql = "Select * from compromissos order by data, hora";
+       
+        String strsql = "select * from compromissos where usuario = ? order by data, hora";
         Connection conn = null;
         try {
             conn = CheckConnection();
             conn.setAutoCommit(true);
             PreparedStatement prepStatement = conn.prepareStatement(strsql);
+            prepStatement.setString(1, usuario);
             rs = prepStatement.executeQuery();
  
             while (rs.next()) {
                 compromissoItem item = new compromissoItem();
+                item.setId(Integer.parseInt(rs.getString("id")));
                 item.setUsuario(rs.getString("usuario"));
                 item.setCompromisso(rs.getString("compromisso"));
                 item.setData(rs.getString("data"));
