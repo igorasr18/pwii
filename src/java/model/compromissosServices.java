@@ -96,7 +96,7 @@ public class compromissosServices {
  
     }    
  
-     public boolean deleteCompromisso(String id){
+     public boolean deleteCompromisso2(String id){
         boolean isSuccess = false;
         ResultSet rs = null;
         String strsql = "delete from compromissos where id=?";
@@ -124,6 +124,21 @@ public class compromissosServices {
             closeConnection();
         }       
  
+        return isSuccess;
+    }
+     
+     public boolean deleteCompromisso(String id) throws SQLException{
+        boolean isSuccess = false;
+        ResultSet rs = null;
+        String strsql = "delete from compromissos where id=?";
+        PreparedStatement prepStatement = null;        
+        Connection conn = null;
+        conn = CheckConnection();
+        int rtnCode = 0;
+        prepStatement = conn.prepareStatement(strsql);
+        prepStatement.setString(1, id);
+        rtnCode = prepStatement.executeUpdate();
+        isSuccess = true;
         return isSuccess;
     }
     
