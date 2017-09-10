@@ -100,6 +100,7 @@ public class LoginAuthentication extends HttpServlet {
             if(usuario.equals(request.getParameter("usuario")) && senha.equals(request.getParameter("senha"))){
                 HttpSession sessao = request.getSession();
                 sessao.setAttribute("login", usuario);
+                
                 response.sendRedirect("PaginaInicial.jsp");
             }
         }
