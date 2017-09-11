@@ -33,7 +33,7 @@
     
     <body>
         <h1>Agenda de Compromissos</h1>
-        <a href="http://localhost:8080/AgendaWebService/webresources/Agenda/Usuario/List"> Teste WebService</a>
+        <a href="http://localhost:8080/pwii3/webresources/Agenda/Usuario/List"> Teste WebService</a>
         <%if(session.getAttribute("login")!=null){%>
             <%
             %>
