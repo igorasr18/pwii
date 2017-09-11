@@ -94,38 +94,25 @@ public class compromissosServices {
         }
         return compromissosLista;
  
-    }    
- 
-     public boolean deleteCompromisso2(String id){
-        boolean isSuccess = false;
+    }
+     
+     public boolean updateCompromisso (String id, String compromisso, String data, String hora) throws SQLException{
+         boolean isSuccess = false;
         ResultSet rs = null;
-        String strsql = "delete from compromissos where id=?";
+        String strsql = "update compromissos set compromisso=?, data=?, hora=? where id=?";
         PreparedStatement prepStatement = null;        
         Connection conn = null;
-        try {
-            conn = CheckConnection();
-            conn.setAutoCommit(true);
-            int rtnCode = 0;
-            getDbConn().setAutoCommit(false);
-            prepStatement = conn.prepareStatement(strsql);
-            prepStatement.setString(1, id);
-            rtnCode = prepStatement.executeUpdate();
-            if (rtnCode > 0) {
-                _dbConn.commit();
-                isSuccess  =true;
-            }else{                
-                _dbConn.rollback();
-                isSuccess  = false;
-            }     
- 
-        } catch (SQLException ex) {
-           //catch handler
-        } finally {
-            closeConnection();
-        }       
- 
+        conn = CheckConnection();
+        int rtnCode = 0;
+        prepStatement = conn.prepareStatement(strsql);
+        prepStatement.setString(1, compromisso);
+        prepStatement.setString(2, data);
+        prepStatement.setString(3, hora);
+        prepStatement.setString(4, id);
+        rtnCode = prepStatement.executeUpdate();
+        isSuccess = true;
         return isSuccess;
-    }
+     }
      
      public boolean deleteCompromisso(String id) throws SQLException{
         boolean isSuccess = false;
