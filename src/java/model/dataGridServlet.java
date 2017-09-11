@@ -46,17 +46,17 @@ public class dataGridServlet extends HttpServlet {
             actionValue = request.getParameter(compromissoSelecionado);  
         }
         if(compromissoSelecionado.trim().equalsIgnoreCase("")){
-            request.setAttribute("errorMessage","Cannot find user id");
+            request.setAttribute("errorMessage","ID do compromisso não encontrado!");
             request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
         }else{            
             if(actionValue.contains("Deletar")){    
                 compromissosServices compromissoServis = new compromissosServices();
                 try {
                     if(compromissoServis.deleteCompromisso(compromissoSelecionado)){
-                        request.setAttribute("successMessage", "Successfully delete user: <b>" + compromissoSelecionado + "</b>");
+                        request.setAttribute("successMessage", "Compromisso deletado com sucesso: <b>" + compromissoSelecionado + "</b>");
                         request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
                     }else{
-                        request.setAttribute("errorMessage", "Failed to delete user: <b>" + compromissoSelecionado + "</b>, please try again");
+                        request.setAttribute("errorMessage", "Falha ao deletar o compromisso: <b>" + compromissoSelecionado + "</b>, tente novamente.");
                         request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);                
                     }
                 } catch (SQLException ex) {

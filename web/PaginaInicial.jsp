@@ -46,14 +46,15 @@
             request.setAttribute("lgn", session.getAttribute("login"));
                 
             %>
-        
+            
+        <div align="right">Bem-vindo, <%out.println(session.getAttribute("login").toString());%></div>
         <form name="loginfrm" action="./dataGridServlet" method="POST" >
             
             <table>
                 <tr>
-                    <td>Usuario:<td>
+                    <td><td>
                         
-                        <input type="hidden" name="usuario" value="${requestScope.usuario}">    
+                    <input type="hidden" name="usuario" value="${requestScope.usuario}">    
                     <td><input type="hidden" name="insert" value="Inserir"</td>
                     
                     <td>Compromisso: </td>
@@ -62,9 +63,10 @@
                     <td><input type="text" name="data" value="" /></td>
                     <td>Hora: </td>
                     <td><input type="text" name="hora" value="" /></td>
+                    <td>&nbsp;<input type="submit" value="Inserir"></td>
                 </tr>
             </table>
-            <input type="submit" value="Inserir">
+            
             <!--<input type="submit" value="Inserir" onclick="compromissoServices/insertCompromisso(lgn, compromisso, data, hora)"/>-->
         </form>
         
@@ -73,9 +75,6 @@
             ${errorMessage}
             ${successMessage}
              
- <%
- out.println(session.getAttribute("login"));
- %>
             <div>
                 <form action="<c:url value="./dataGridServlet" />" method="POST">
                       <%
@@ -90,7 +89,7 @@
                           
                           dataGridServlet d = new dataGridServlet();
                           d.setUsu(s);
-                          out.print(s);
+                          //out.print(s);
                           compromissosServices compromissoServ = new compromissosServices();
                          
                           List<compromissoItem> CompromissosList = new ArrayList<compromissoItem>();                          
