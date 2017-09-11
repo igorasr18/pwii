@@ -1,3 +1,4 @@
+<%@page import="model.dataGridServlet"%>
 <%@page import="model.compromissoItem"%>
 <%@page import="model.compromissosServices"%>
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
@@ -32,18 +33,49 @@
     
     <body>
         <h1>Agenda de Compromissos</h1>
+        <a href="http://localhost:8080/AgendaWebService/webresources/Agenda/Usuario/List"> Teste WebService</a>
         <%if(session.getAttribute("login")!=null){%>
-            <%--Nào faz nada--%>
+            <%
+            %>
         <%} else{
             response.sendRedirect("loginAgenda.jsp?msg='Efetue o login'");
         }%>
+        <%
+                
+            String usuario = session.getAttribute("login").toString();
+            request.setAttribute("lgn", session.getAttribute("login"));
+                
+            %>
+        
+        <form name="loginfrm" action="./dataGridServlet" method="POST" >
+            
+            <table>
+                <tr>
+                    <td>Usuario:<td>
+                        
+                        <input type="hidden" name="usuario" value="${requestScope.usuario}">    
+                    <td><input type="hidden" name="insert" value="Inserir"</td>
+                    
+                    <td>Compromisso: </td>
+                    <td><input type="text" name="compromisso" value="" /> </td>
+                    <td>Data: </td>
+                    <td><input type="text" name="data" value="" /></td>
+                    <td>Hora: </td>
+                    <td><input type="text" name="hora" value="" /></td>
+                </tr>
+            </table>
+            <input type="submit" value="Inserir">
+            <!--<input type="submit" value="Inserir" onclick="compromissoServices/insertCompromisso(lgn, compromisso, data, hora)"/>-->
+        </form>
         
         <fieldset>
             <legend>Lista de Compromissos</legend>
             ${errorMessage}
             ${successMessage}
              
- 
+ <%
+ out.println(session.getAttribute("login"));
+ %>
             <div>
                 <form action="<c:url value="./dataGridServlet" />" method="POST">
                       <%
@@ -54,8 +86,13 @@
                           int pageIndex = 0; //start page from index 0
                           String s = session.getAttribute("login").toString();
                           session = request.getSession(false);
+                          session.getAttribute("login").toString();
+                          
+                          dataGridServlet d = new dataGridServlet();
+                          d.setUsu(s);
                           out.print(s);
                           compromissosServices compromissoServ = new compromissosServices();
+                         
                           List<compromissoItem> CompromissosList = new ArrayList<compromissoItem>();                          
                           CompromissosList = compromissoServ.getCompromissos(s);                         
  

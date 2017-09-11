@@ -141,6 +141,23 @@ public class compromissosServices {
         isSuccess = true;
         return isSuccess;
     }
+     public boolean insertCompromisso(String usuario, String compromisso, String data, String hora) throws SQLException{
+        boolean isSuccess = false;
+        ResultSet rs = null;
+        String strsql = "insert into compromissos (usuario, compromisso, data, hora) values (?,?,?,?)";
+        PreparedStatement prepStatement = null;        
+        Connection conn = null;
+        conn = CheckConnection();
+        int rtnCode = 0;
+        prepStatement = conn.prepareStatement(strsql);
+        prepStatement.setString(1, usuario);
+        prepStatement.setString(2, compromisso);
+        prepStatement.setString(3, data);
+        prepStatement.setString(4, hora);
+        rtnCode = prepStatement.executeUpdate();
+        isSuccess = true;
+        return isSuccess;
+    }
     
     public void closeConnection() {
         try {
