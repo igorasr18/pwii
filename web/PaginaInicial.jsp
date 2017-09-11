@@ -54,7 +54,7 @@
                           int pageIndex = 0; //start page from index 0
                           String s = session.getAttribute("login").toString();
                           session = request.getSession(false);
-
+                          out.print(s);
                           compromissosServices compromissoServ = new compromissosServices();
                           List<compromissoItem> CompromissosList = new ArrayList<compromissoItem>();                          
                           CompromissosList = compromissoServ.getCompromissos(s);                         
