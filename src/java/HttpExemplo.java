@@ -24,7 +24,7 @@ public class HttpExemplo {
  
 		HttpExemplo http = new HttpExemplo();
                 String chamadaWS;
-                chamadaWS = "http://localhost:8080/AgendaWebService/webresources/Agenda/Usuario/List";
+                chamadaWS = "http://localhost:8080/pwii3/webresources/Agenda/Usuario/List";
                 String json = http.sendGet(chamadaWS);
 		System.out.println("Testing 1 - Send Http GET request");
 		System.out.println(json);
