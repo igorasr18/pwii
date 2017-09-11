@@ -10,7 +10,10 @@ package model;
  * @author Igor
  */
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Enumeration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,13 +39,17 @@ public class dataGridServlet extends HttpServlet {
         }else{            
             if(actionValue.contains("Deletar")){    
                 compromissosServices compromissoServis = new compromissosServices();
-                if(compromissoServis.deleteCompromisso(compromissoSelecionado)){
-                    request.setAttribute("successMessage", "Successfully delete user: <b>" + compromissoSelecionado + "</b>");
-                    request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
-                }else{
-                    request.setAttribute("errorMessage", "Failed to delete user: <b>" + compromissoSelecionado + "</b>, please try again");                    
-                   request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
-                }                
+                try {
+                    if(compromissoServis.deleteCompromisso(compromissoSelecionado)){
+                        request.setAttribute("successMessage", "Successfully delete user: <b>" + compromissoSelecionado + "</b>");
+                        request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
+                    }else{
+                        request.setAttribute("errorMessage", "Failed to delete user: <b>" + compromissoSelecionado + "</b>, please try again");
+                        request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);                
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(dataGridServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 //process redirect to modify user page with query string user id
                 //redirect to modify page
