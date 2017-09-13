@@ -67,14 +67,14 @@ public class dataGridServlet extends HttpServlet {
                 //String usuario = request.getAttribute("lgn").toString();
                 
                 HttpSession sessao = request.getSession();
-                sessao.setAttribute("login", usu);
+                sessao.setAttribute("login", sessao.getAttribute("login").toString());
                 
                 String usuario = request.getParameter("usuario");
                 String compromisso = request.getParameter("compromisso");
                 String data = request.getParameter("data");
                 String hora = request.getParameter("hora");
                 try {
-                    compromissoServis2.insertCompromisso(usu, compromisso, data, hora);
+                    compromissoServis2.insertCompromisso(sessao.getAttribute("login").toString(), compromisso, data, hora);
                     //request.getRequestDispatcher("/PaginaInicial.jsp").forward(request, response);
                     response.sendRedirect("./PaginaInicial.jsp");
                 } catch (SQLException ex) {

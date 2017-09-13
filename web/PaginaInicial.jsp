@@ -32,6 +32,7 @@
     </head>
     
     <body>
+        
         <h1>Agenda de Compromissos</h1>
         <a href="http://localhost:8080/pwii3/webresources/Agenda/Usuario/List"> Teste WebService</a>
         <%if(session.getAttribute("login")!=null){%>
@@ -40,12 +41,16 @@
         <%} else{
             response.sendRedirect("loginAgenda.jsp?msg='Efetue o login'");
         }%>
-        <%
-                
+        
+        <%  
+            
             String usuario = session.getAttribute("login").toString();
-            request.setAttribute("lgn", session.getAttribute("login"));
-                
-            %>
+            request.setAttribute("lgn", session.getAttribute("login"));  
+            
+            HttpSession sessao = request.getSession();
+            sessao.setAttribute("login", session.getAttribute("login").toString());
+                          
+        %>
             
         <div align="right">Bem-vindo, <%out.println(session.getAttribute("login").toString());%></div>
         <form name="loginfrm" action="./dataGridServlet" method="POST" >
@@ -54,7 +59,7 @@
                 <tr>
                     <td><td>
                         
-                    <input type="hidden" name="usuario" value="${requestScope.usuario}">    
+                        <input type="text" name="usuario" value="${login}">    
                     <td><input type="hidden" name="insert" value="Inserir"</td>
                     
                     <td>Compromisso: </td>
