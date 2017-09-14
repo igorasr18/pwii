@@ -19,7 +19,7 @@
     <script type="text/javascript">
  
         function ConfirmOnDelete(item) {
-            if (confirm("Are you sure to delete " + item + "?") === true)
+            if (confirm("Tem certeza que deseja Detelar o compromisso " + item + "?") === true)
                 return true;
             else
                 return false;
@@ -34,7 +34,7 @@
     <body>
         
         <h1>Agenda de Compromissos</h1>
-        <a href="http://localhost:8080/pwii3/webresources/Agenda/Usuario/List"> Teste WebService</a>
+        <a href="http://localhost:8080/pwii3/webresources/Agenda/Usuario/List"> Acessar WebService</a>
         <%if(session.getAttribute("login")!=null){%>
             <%
             %>
@@ -57,22 +57,19 @@
             
             <table>
                 <tr>
-                    <td><td>
-                        
-                        <input type="text" name="usuario" value="${login}">    
-                    <td><input type="hidden" name="insert" value="Inserir"</td>
-                    
-                    <td>Compromisso: </td>
-                    <td><input type="text" name="compromisso" value="" /> </td>
+                    <td>
+                        <input type="hidden" name="usuario" value="${login}">    
+                        <input type="hidden" name="insert" value="Inserir"
+                    </td>       
+                    <td>Compromisso:</td>
+                    <td><input type="text" name="compromisso" value="" /></td>
                     <td>Data: </td>
-                    <td><input type="text" name="data" value="" /></td>
+                    <td><input type="date" name="data" value="" /></td>
                     <td>Hora: </td>
-                    <td><input type="text" name="hora" value="" /></td>
+                    <td><input type="time" name="hora" value="" /></td>
                     <td>&nbsp;<input type="submit" value="Inserir"></td>
                 </tr>
             </table>
-            
-            <!--<input type="submit" value="Inserir" onclick="compromissoServices/insertCompromisso(lgn, compromisso, data, hora)"/>-->
         </form>
         
         <fieldset>
@@ -137,7 +134,7 @@
                               tableCompromissos += "<input type=\"submit\" class=\"buttonLikeLink\" name=\"" + ci.getId() + "\" onclick=\"return ConfirmOnDelete('" + ci.getId() + "');\" value=\"Deletar\" />";
                               tableCompromissos += "</td>";
                               tableCompromissos += "<td style=\"border-color:#CCCCCC;border-width:1px;border-style:Solid;width:50px;padding:4px;\">";
-                              tableCompromissos += "<input type=\"submit\" class=\"buttonLikeLink\" name=\"" + ci.getId() + "\" value=\"Editar\" ></input>";
+                              tableCompromissos += "<a href='update.jsp?id=" + ci.getId()+"'>Editar</a>";
                               tableCompromissos += "</td>";
                               tableCompromissos += "</tr>";
                               //index++;
