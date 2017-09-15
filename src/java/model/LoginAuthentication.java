@@ -104,7 +104,7 @@ public class LoginAuthentication extends HttpServlet {
                 response.sendRedirect("PaginaInicial.jsp");
             }
         }
-        response.sendRedirect("loginAgenda.jsp?msg=Nenhum usuario logado.");
+        response.sendRedirect("loginAgenda.jsp?msg=Usuario ou Senha incorretos.");
 
         rs.close ();
         s.close ();

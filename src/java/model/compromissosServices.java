@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -65,6 +66,37 @@ public class compromissosServices {
         _user = "root";
         _dbPassword = "root";      
     }
+    
+    public compromissoItem getCompromisso(String idCompromisso) {
+        ResultSet rs = null;
+        compromissoItem item = new compromissoItem();
+        String strsql = "select * from compromissos where id = ?";
+        Connection conn = null;
+        try {
+            conn = CheckConnection();
+            conn.setAutoCommit(true);
+            PreparedStatement prepStatement = conn.prepareStatement(strsql);
+            prepStatement.setString(1, idCompromisso);
+            rs = prepStatement.executeQuery();
+ 
+            while (rs.next()) {                
+                item.setId(Integer.parseInt(rs.getString("id")));
+                item.setUsuario(rs.getString("usuario"));
+                item.setCompromisso(rs.getString("compromisso"));
+                item.setData(rs.getString("data"));
+                item.setHora(rs.getString("hora"));
+            }
+ 
+        } catch (SQLException ex) {
+            //handle catch
+        } finally {
+            closeConnection();
+        }
+        return item;
+ 
+    }
+    
+    
     public List<compromissoItem> getCompromissos(String usuario) {
         ResultSet rs = null;
        
@@ -95,9 +127,13 @@ public class compromissosServices {
         return compromissosLista;
  
     }
+    
+    public void editarClick(int id){
+        //document.getElementById('btnEditar').style.visibility="hidden";
+    }
      
      public boolean updateCompromisso (String id, String compromisso, String data, String hora) throws SQLException{
-         boolean isSuccess = false;
+        boolean isSuccess = false;
         ResultSet rs = null;
         String strsql = "update compromissos set compromisso=?, data=?, hora=? where id=?";
         PreparedStatement prepStatement = null;        

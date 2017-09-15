@@ -7,59 +7,39 @@
     Created on : 08/09/2017, 20:54:15
     Author     : 2141123903
 --%>
-
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    
-    <script type="text/javascript">
- 
-        function ConfirmOnDelete(item) {
-            if (confirm("Tem certeza que deseja Detelar o compromisso " + item + "?") === true)
-                return true;
-            else
-                return false;
-       }
-    </script>
-    
+<html>    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Agenda de Compromissos</title>
-    </head>
-    
-    <body>
-        
+    </head>    
+    <body>        
         <h1>Agenda de Compromissos</h1>
         <a href="http://localhost:8080/pwii3/webresources/Agenda/Usuario/List"> Acessar WebService</a>
         <%if(session.getAttribute("login")!=null){%>
             <%
             %>
         <%} else{
-            response.sendRedirect("loginAgenda.jsp?msg='Efetue o login'");
-        }%>
-        
+                response.sendRedirect("loginAgenda.jsp?msg='Efetue o login'");
+        }%>        
         <%  
-            
-            String usuario = session.getAttribute("login").toString();
-            request.setAttribute("lgn", session.getAttribute("login"));  
-            
+            request.setAttribute("lgn", session.getAttribute("login"));             
             HttpSession sessao = request.getSession();
-            sessao.setAttribute("login", session.getAttribute("login").toString());
-                          
+            sessao.setAttribute("login", session.getAttribute("login").toString());                         
         %>
             
         <div align="right">Bem-vindo, <%out.println(session.getAttribute("login").toString());%></div>
-        <form name="loginfrm" action="./dataGridServlet" method="POST" >
-            
+        <form name="loginfrm" action="./dataGridServlet" method="POST" >            
             <table>
                 <tr>
-                    <td>
-                        <input type="hidden" name="usuario" value="${login}">    
-                        <input type="hidden" name="insert" value="Inserir"
+                    <td>                        
+                    <input type="hidden" name="usuario" value="${login}">    
+                    <input type="hidden" name="insert" value="Inserir"
                     </td>       
                     <td>Compromisso:</td>
                     <td><input type="text" name="compromisso" value="" /></td>
@@ -70,34 +50,20 @@
                     <td>&nbsp;<input type="submit" value="Inserir"></td>
                 </tr>
             </table>
-        </form>
-        
+        </form>        
         <fieldset>
             <legend>Lista de Compromissos</legend>
             ${errorMessage}
-            ${successMessage}
-             
+            ${successMessage}             
             <div>
                 <form action="<c:url value="./dataGridServlet" />" method="POST">
                       <%
-                          int limitStart = 0;
-                          int limitMax = 15;
-                          int pageSize = 15;
-                          int allUserCount = 0;
-                          int pageIndex = 0; //start page from index 0
                           String s = session.getAttribute("login").toString();
                           session = request.getSession(false);
-                          session.getAttribute("login").toString();
-                          
-                          dataGridServlet d = new dataGridServlet();
-                          d.setUsu(s);
-                          //out.print(s);
-                          compromissosServices compromissoServ = new compromissosServices();
-                         
+                          session.getAttribute("login").toString();                        
+                          compromissosServices compromissoServ = new compromissosServices();                        
                           List<compromissoItem> CompromissosList = new ArrayList<compromissoItem>();                          
                           CompromissosList = compromissoServ.getCompromissos(s);                         
- 
- 
                           String tableCompromissos = "<table class=\"mainTable\" cellspacing=\"0\" rules=\"all\" id=\"MainContent_GridView1\" style=\"border-color:Gray;border-width:1px;border-style:Solid;width:95%;border-collapse:collapse;\">";
                           tableCompromissos += "<tr style=\"color:White;background-color:#6699CC;font-weight:bold; padding:4px;\">";
                           tableCompromissos += "<th scope=\"col\">ID.</th>";
@@ -107,11 +73,6 @@
                           tableCompromissos += "<th scope=\"col\">Hora</th>";
                           tableCompromissos += "<th scope=\"col\">&nbsp;</th>";
                           tableCompromissos += "<th scope=\"col\">&nbsp;</th></tr>";
- 
-                          int numberRecord = pageIndex * pageSize;
-                          int balance = allUserCount - numberRecord;
-                          int startRekodToShow = numberRecord + 1;
-                          int index = startRekodToShow;
 
                           for (compromissoItem ci : CompromissosList) {
                               tableCompromissos += "<tr style=\"border-color:Gray;border-width:1px;border-style:Solid;\">";
@@ -137,7 +98,6 @@
                               tableCompromissos += "<a href='update.jsp?id=" + ci.getId()+"'>Editar</a>";
                               tableCompromissos += "</td>";
                               tableCompromissos += "</tr>";
-                              //index++;
                           }
                           tableCompromissos += "</table>";
                           out.print(tableCompromissos);
@@ -145,8 +105,15 @@
             </form>
         </div>
     </fieldset>
-
     </body>
     
-  
+    <script type="text/javascript"> 
+        function ConfirmOnDelete(item) {
+            if (confirm("Tem certeza que deseja Detelar o compromisso " + item + "?") === true)
+                return true;
+            else
+                return false;
+       }
+    </script>
+    
 </html>

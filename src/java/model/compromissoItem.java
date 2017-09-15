@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author Igor
@@ -23,6 +25,9 @@ public class compromissoItem {
         hora = "";
         id = 0;
     }
+    
+   
+    
     public int getId() {
         return id;
     }
@@ -48,6 +53,12 @@ public class compromissoItem {
     public void setData(String data) {
         this.data = data;
     }
+    
+     public String getDataFormatada(){
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+	return formato.format(getData());
+    }
+     
     public String getHora() {
         return hora;
     }

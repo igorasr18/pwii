@@ -24,10 +24,10 @@ import javax.servlet.http.HttpSession;
  
 public class dataGridServlet extends HttpServlet {
     
-    String usu = "";
-        public void setUsu(String usu){
-            this.usu = usu;
-        }
+//    String usu = "";
+//        public void setUsu(String usu){
+//            this.usu = usu;
+//        }
  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -35,10 +35,7 @@ public class dataGridServlet extends HttpServlet {
          
         String actionValue = "";
         String compromissoSelecionado = "";
-        
         String action = request.getParameter("insert");
-        
-        //String compromisso = "";
         
         Enumeration en = request.getParameterNames();
         while (en.hasMoreElements()) {
@@ -64,7 +61,6 @@ public class dataGridServlet extends HttpServlet {
                 }
             }if(action.contains("Inserir")){
                 compromissosServices compromissoServis2 = new compromissosServices();
-                //String usuario = request.getAttribute("lgn").toString();
                 
                 HttpSession sessao = request.getSession();
                 sessao.setAttribute("login", sessao.getAttribute("login").toString());
