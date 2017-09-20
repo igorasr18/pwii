@@ -20,20 +20,28 @@
     </head>    
     <body>        
         <h1>Agenda de Compromissos</h1>
-        <a href="http://localhost:8080/pwii3/webresources/Agenda/Usuario/List"> Acessar WebService</a>
-        <%if(session.getAttribute("login")!=null){%>
-            <%
-            %>
-        <%} else{
-                response.sendRedirect("loginAgenda.jsp?msg='Efetue o login'");
-        }%>        
+        <a href="http://localhost:8080/Apresentacao/webresources/Agenda/Usuario/List"> Acessar WebService</a>
+        
+        <%
+        if(session.getAttribute("login")==null || session.getAttribute("login")== "" ){
+            session.setAttribute("login", "");
+            response.sendRedirect("loginAgenda.jsp?msg='Login expirado, por favor autentique novamente'");
+        } else{
+            //Faz nada
+        }%>
+
         <%  
-            request.setAttribute("lgn", session.getAttribute("login"));             
-            HttpSession sessao = request.getSession();
-            sessao.setAttribute("login", session.getAttribute("login").toString());                         
+//            request.setAttribute("lgn", session.getAttribute("login"));             
+//            HttpSession sessao = request.getSession();
+//            sessao.setAttribute("login", session.getAttribute("login").toString());                         
         %>
             
-        <div align="right">Bem-vindo, <%out.println(session.getAttribute("login").toString());%></div>
+        <div align="right">Bem vindo, <%out.println(session.getAttribute("login").toString());%>
+            <br />
+            <a href="logout.jsp">Sair</a>
+            
+        </div>
+        
         <form name="loginfrm" action="./dataGridServlet" method="POST" >            
             <table>
                 <tr>

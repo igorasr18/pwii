@@ -7,12 +7,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"  language="java"%>
 <!DOCTYPE html>
 <html>
+    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Agenda</title>
     </head>
     <body style="background-color:#81DAF5;">
     <center>
+        
+        <%
+//                session.setAttribute("login", "off");
+//                session.invalidate();
+            %>
         
         <h1>Agenda</h1>
         <form name="loginfrm" action="./LoginAuthentication" method="POST" >
