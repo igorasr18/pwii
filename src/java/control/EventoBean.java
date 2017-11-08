@@ -8,6 +8,7 @@ package control;
 import infra.Compromisso;
 import infra.CompromissoDAO;
 import infra.SessionUtil;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -145,6 +146,19 @@ public class EventoBean {
                 e.printStackTrace();
             }
         }
+    }
+    
+    public String matarSessao() throws IOException{
+            String url="";
+            SessionUtil.setParam("UsuarioLogado", null);
+            SessionUtil.invalidate();
+            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+            Map<String, Object> sessionMap = externalContext.getSessionMap();
+            sessionMap.clear();
+            url="newjsf?faces-redirect=true";
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            ec.redirect(url);
+            return url;
     }
     
     

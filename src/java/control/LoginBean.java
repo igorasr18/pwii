@@ -7,6 +7,7 @@ package control;
 
 import infra.CompromissoDAO;
 import infra.SessionUtil;
+import infra.Usuario;
 import infra.UsuarioDAO;
 import java.io.Serializable;
 import java.util.Map;
@@ -61,4 +62,13 @@ public class LoginBean implements Serializable{
         }
         return url;
     }
+    
+    public void cadastrarUsuario(){
+        UsuarioDAO uDao = new UsuarioDAO();
+        Usuario usu = new Usuario();
+        usu.setLogin(this.usuario);
+        usu.setSenha(senha);
+        usu = uDao.cadastrarUsuario(usu);
+    }
+    
 }

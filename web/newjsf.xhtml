@@ -8,7 +8,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Sign In Template for BootsFaces</title>
-        <meta name="author" content="Riccardo Massera"></meta>
+        <meta name="author" content="Lucas Carvalho"></meta>
         <style type="text/css">
             .form-signin {
                 margin: 0 auto;
@@ -20,20 +20,22 @@
     <h:body style="padding-top: 60px; background-color: #add;">
         <b:container>
             <h:form styleClass="form-signin" prependId="false">
-                <h2 class="form-signin-heading">Please sign in</h2>
-                <b:inputText id="email" placeholder="Email address" value="#{login.usuario}">
+                <h2 class="form-signin-heading">Faça o Login</h2>
+                <b:inputText id="email" placeholder="Usuario" value="#{login.usuario}">
                     <f:facet name="prepend">
                         <b:icon name="user" />
                     </f:facet>
                 </b:inputText>
-                <b:inputText id="password" placeholder="Password" type="password" value="#{login.senha}">
+                <b:inputText id="password" placeholder="Senha" type="password" value="#{login.senha}">
                     <f:facet name="prepend">
                         <b:iconAwesome name="key" />
                     </f:facet>
                 </b:inputText>
-                <b:selectBooleanCheckbox value="true" caption="remember me"/>
-                <b:commandButton look="primary btn-block" value="Cadastre-se" icon="log-in" size="1g" onclick=""/>
-                <b:commandButton look="primary btn-block" value="Sign In" icon="log-in" size="lg" action="#{login.autentica()}"/>
+                
+                <b:commandButton look="primary btn-block" value="Entrar" icon="log-in" size="lg" action="#{login.autentica()}"/>
+                <h6 class="form-signin-heading">Não possui cadastro? faça-o agora!</h6>
+                <b:commandButton look="success btn-block"  value="Cadastre-se" iconAwesome="thumbs-up" icon-size="2x"  size="small"  action="#{login.cadastrarUsuario()}"/>   
+                <p:messages showDetail="false" rendered="true" autoUpdate="true" globalOnly="true"/>              
             </h:form>
         </b:container>
     </h:body>
